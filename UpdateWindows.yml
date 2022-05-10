@@ -1,0 +1,16 @@
+- name: update hosts
+  hosts: DMZ-V8-Windows
+  gather_facts: false
+  tasks:
+    - name: Search and download Windows updates without installing
+      win_updates:
+        state: downloaded
+    - name: Install all updates without a schedule tasks
+      win_updates:
+        server_selection: windows_update
+        category_names:
+          - SecurityUpdates
+          - CriticalUpdates
+          - UpdateRollups
+        reboot: yes
+        log_path: c:\Win_Patch_Aplicados.log
